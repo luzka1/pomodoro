@@ -1,19 +1,20 @@
-import { PlayCircleIcon, StopCircleIcon } from "lucide-react";
-
-import { DefaultInput } from "../DefaultInput";
-import { DefaultButton } from "../DefaultButton";
 import { useRef } from "react";
 import { useTaskContext } from "../../contexts/TaskContext/useTaskContext";
 import { getNextCycle } from "../../utils/getNextCycle";
 import { getNextCycleType } from "../../utils/getNextCycleType";
+
 import type { TaskModel } from "../../models/TaskModel";
-import { formatSecondsToMinutes } from "../../utils/formatSecondsToMinutes";
+import { TaskActionTypes } from "../../contexts/TaskContext/taskActions";
+
+import { PlayCircleIcon, StopCircleIcon } from "lucide-react";
+import { DefaultInput } from "../DefaultInput";
+import { DefaultButton } from "../DefaultButton";
 import { Cycles } from "../Cycles";
 import { Tips } from "../Tips";
-import { TaskActionTypes } from "../../contexts/TaskContext/taskActions";
 
 export function MainForm() {
   const { state, dispatch } = useTaskContext();
+  const lastTaskName = state.tasks[state.tasks.length - 1]?.name;
 
   const taskInput = useRef<HTMLInputElement>(null);
 
@@ -59,6 +60,7 @@ export function MainForm() {
           type="text"
           ref={taskInput}
           disabled={!!state.activeTask}
+          defaultValue={lastTaskName}
         />
       </div>
 
