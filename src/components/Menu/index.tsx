@@ -45,7 +45,7 @@ export function Menu() {
         <HouseIcon />
       </RouterLink>
 
-      <RouterLink href="/hisory" className={styles.menuLink}>
+      <RouterLink href="/history" className={styles.menuLink}>
         <HistoryIcon />
       </RouterLink>
       <RouterLink href="/settings" className={styles.menuLink}>
