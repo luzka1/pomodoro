@@ -10,7 +10,20 @@ type TaskProviderProps = {
 };
 
 export function TaskContextProvider({ children }: TaskProviderProps) {
-  const [state, dispatch] = useReducer(TaskReducer, initialTaskState);
+  const [state, dispatch] = useReducer(TaskReducer, initialTaskState, () => {
+    const storageState = localStorage.getItem("state");
+
+    if (!storageState) return initialTaskState;
+
+    const parsedState = JSON.parse(storageState);
+
+    return {
+      ...parsedState,
+      activeTask: null,
+      secondsRemaining: 0,
+      formattedSecondsRemaining: "00:00",
+    };
+  });
 
   const worker = TimerWorkerManager.getInstance();
 
@@ -32,9 +45,13 @@ export function TaskContextProvider({ children }: TaskProviderProps) {
   });
 
   useEffect(() => {
+    localStorage.setItem("state", JSON.stringify(state));
+
     if (!state.activeTask) {
       worker.terminate();
     }
+
+    document.title = `${state.formattedSecondsRemaining} - Chronos Pomodoro`;
 
     worker.postMessage(state);
   }, [state]);

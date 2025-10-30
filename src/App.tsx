@@ -1,9 +1,12 @@
-import { HomePage } from "./pages/Home";
+import { TaskContextProvider } from "./contexts/TaskContext/TaskContextProvider";
+import { MainRouter } from "./routers/MainRouter";
 
 function App() {
   return (
     <>
-      <HomePage />
+      <TaskContextProvider>
+        <MainRouter />
+      </TaskContextProvider>
     </>
   );
 }
