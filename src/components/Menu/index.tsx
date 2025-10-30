@@ -7,8 +7,14 @@ import {
 } from "lucide-react";
 import styles from "./styles.module.css";
 import React, { useEffect, useState } from "react";
+import { Link } from "react-router";
 
 type AvailableThemes = "light" | "dark";
+
+const themesInPortuguese = {
+  dark: "Escuro",
+  light: "Claro",
+};
 
 export function Menu() {
   const [theme, setTheme] = useState<AvailableThemes>(() => {
@@ -16,6 +22,7 @@ export function Menu() {
       (localStorage.getItem("theme") as AvailableThemes) || "dark";
     return storageTheme;
   });
+  const [nextTheme, setNextTheme] = useState<AvailableThemes>("dark");
 
   const nextThemeIcon = {
     light: <MoonIcon />,
@@ -36,21 +43,43 @@ export function Menu() {
   useEffect(() => {
     document.documentElement.setAttribute("data-theme", theme);
     localStorage.setItem("theme", theme);
+
+    setNextTheme((prevTheme) => {
+      const nextTheme = prevTheme != "dark" ? "dark" : "light";
+      return nextTheme;
+    });
   }, [theme]);
 
   return (
     <nav className={styles.menu}>
-      <a href="#" className={styles.menuLink}>
+      <Link
+        aria-label="Ir para Home"
+        title="Ir para Home"
+        to="/"
+        className={styles.menuLink}
+      >
         <HouseIcon />
-      </a>
+      </Link>
 
-      <a href="#" className={styles.menuLink}>
+      <a
+        aria-label="Ir para Histórico"
+        title="Ir para Histórico"
+        href="#"
+        className={styles.menuLink}
+      >
         <HistoryIcon />
       </a>
-      <a href="#" className={styles.menuLink}>
+      <a
+        aria-label="Ir para Configurações"
+        title="Ir para Configurações"
+        href="#"
+        className={styles.menuLink}
+      >
         <SettingsIcon />
       </a>
       <a
+        aria-label={`Trocar tema para ${themesInPortuguese[nextTheme]}`}
+        title={`Trocar tema para ${themesInPortuguese[nextTheme]}`}
         href="#"
         className={styles.menuLink}
         onClick={(e) => handleChangeTheme(e)}

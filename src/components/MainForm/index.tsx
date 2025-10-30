@@ -7,10 +7,10 @@ import { useTaskContext } from "../../contexts/TaskContext/useTaskContext";
 import { getNextCycle } from "../../utils/getNextCycle";
 import { getNextCycleType } from "../../utils/getNextCycleType";
 import type { TaskModel } from "../../models/TaskModel";
-import { formatSecondsToMinutes } from "../../utils/formatSecondsToMinutes";
 import { Cycles } from "../Cycles";
 import { Tips } from "../Tips";
 import { TaskActionTypes } from "../../contexts/TaskContext/taskActions";
+import { showMessage } from "../../adapters/showMessage";
 
 export function MainForm() {
   const { state, dispatch } = useTaskContext();
@@ -23,12 +23,14 @@ export function MainForm() {
   function handleSubmitForm(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
 
+    showMessage.dismiss();
+
     if (!taskInput) return;
 
     const taskName = taskInput.current?.value.trim();
 
     if (!taskName) {
-      alert("Digite o nome da sua tarefa!");
+      showMessage.warn("Digite o nome da sua tarefa!");
       return;
     }
 
@@ -46,6 +48,8 @@ export function MainForm() {
   }
 
   function handleInterruptTask() {
+    showMessage.dismiss();
+    showMessage.error("Tarefa interrompida!");
     dispatch({ type: TaskActionTypes.INTERRUPT_TASK });
   }
 
