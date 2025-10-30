@@ -11,10 +11,7 @@ type TaskProviderProps = {
 };
 
 export function TaskContextProvider({ children }: TaskProviderProps) {
-<<<<<<< HEAD
-  const [state, dispatch] = useReducer(TaskReducer, initialTaskState);
   const loadBeepRef = useRef<ReturnType<typeof loadBeep> | null>(null);
-=======
   const [state, dispatch] = useReducer(TaskReducer, initialTaskState, () => {
     const storageState = localStorage.getItem("state");
 
@@ -29,7 +26,6 @@ export function TaskContextProvider({ children }: TaskProviderProps) {
       formattedSecondsRemaining: "00:00",
     };
   });
->>>>>>> d648df2b306a626b1524d5137de7456338870f17
 
   const worker = TimerWorkerManager.getInstance();
 

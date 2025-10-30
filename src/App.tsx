@@ -1,3 +1,4 @@
+import { MessagesContainer } from "./components/MessagesContainer";
 import { TaskContextProvider } from "./contexts/TaskContext/TaskContextProvider";
 import { MainRouter } from "./routers/MainRouter";
 
@@ -5,7 +6,9 @@ function App() {
   return (
     <>
       <TaskContextProvider>
-        <MainRouter />
+        <MessagesContainer>
+          <MainRouter />
+        </MessagesContainer>
       </TaskContextProvider>
     </>
   );

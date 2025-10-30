@@ -45,7 +45,7 @@ export function MainForm() {
       interruptDate: null,
       duration: state.config[nextCycleType],
     };
-
+    showMessage.success("Tarefa iniciada com sucesso!");
     dispatch({ type: TaskActionTypes.START_TASK, payload: newTask });
   }
 
