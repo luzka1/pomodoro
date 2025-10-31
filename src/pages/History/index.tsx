@@ -7,15 +7,17 @@ import { MainTemplate } from "../../templates/MainTemplate";
 import styles from "./styles.module.css";
 import { useTaskContext } from "../../contexts/TaskContext/useTaskContext";
 import { HistoryTable } from "../../components/HistoryTable";
+import { TaskActionTypes } from "../../contexts/TaskContext/taskActions";
 
 export function History() {
-  const { state } = useTaskContext();
+  const { state, dispatch } = useTaskContext();
 
-  console.log(state)
+  const hasTasks = state.tasks.length > 0;
 
-  function removeHistory() {
-    localStorage.removeItem("state");
-    window.location.reload();
+  function handleResetHistory() {
+    if (!confirm("Tem certeza que deseja apagar o histórico?")) return;
+
+    dispatch({ type: TaskActionTypes.RESET_TASK });
   }
 
   return (
@@ -23,22 +25,24 @@ export function History() {
       <Container>
         <Heading>
           <span>Histórico</span>
-          <span className={styles.buttonContainer}>
-            <DefaultButton
-              aria-label="Apagar o histórico"
-              title="Apagar o histórico"
-              type="button"
-              color="red"
-              onClick={removeHistory}
-              icon={<TrashIcon />}
-            />
-          </span>
+          {hasTasks && (
+            <span className={styles.buttonContainer}>
+              <DefaultButton
+                aria-label="Apagar o histórico"
+                title="Apagar o histórico"
+                type="button"
+                color="red"
+                onClick={handleResetHistory}
+                icon={<TrashIcon />}
+              />
+            </span>
+          )}
         </Heading>
       </Container>
 
       <Container>
         <div className={styles.responsiveTable}>
-          {state.tasks.length > 0 ? (
+          {hasTasks ? (
             <HistoryTable />
           ) : (
             <div className={styles.noTask}>

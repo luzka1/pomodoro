@@ -1,7 +1,7 @@
-import { showMessage } from "../../adapters/showMessage";
 import type { TaskStateModel } from "../../models/TaskStateModel";
 import { formatSecondsToMinutes } from "../../utils/formatSecondsToMinutes";
 import { getNextCycle } from "../../utils/getNextCycle";
+import { initialTaskState } from "./initialTaskState";
 import { TaskActionTypes, type TaskActionsModel } from "./taskActions";
 
 export function TaskReducer(
@@ -65,7 +65,8 @@ export function TaskReducer(
     }
 
     case TaskActionTypes.RESET_TASK: {
-      return state;
+      localStorage.removeItem("state");
+      return { ...initialTaskState };
     }
   }
 

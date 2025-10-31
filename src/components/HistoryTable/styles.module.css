@@ -1,0 +1,8 @@
+.thClass {
+    transition: 200ms all;
+}
+
+.thClass:hover{
+    background-color: var(--gray-700);
+    cursor: pointer;
+}
