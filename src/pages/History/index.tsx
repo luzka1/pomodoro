@@ -3,21 +3,33 @@ import { Container } from "../../components/Container";
 import { DefaultButton } from "../../components/DefaultButton";
 import { Heading } from "../../components/Heading";
 import { MainTemplate } from "../../templates/MainTemplate";
-
 import styles from "./styles.module.css";
+
 import { useTaskContext } from "../../contexts/TaskContext/useTaskContext";
 import { HistoryTable } from "../../components/HistoryTable";
 import { TaskActionTypes } from "../../contexts/TaskContext/taskActions";
+import { useEffect, useState } from "react";
+import { showMessage } from "../../adapters/showMessage";
 
 export function History() {
   const { state, dispatch } = useTaskContext();
+  const [confirmResetHistory, setConfirmResetHistory] = useState(false);
 
   const hasTasks = state.tasks.length > 0;
 
-  function handleResetHistory() {
-    if (!confirm("Tem certeza que deseja apagar o histórico?")) return;
+  useEffect(() => {
+    if (!confirmResetHistory) return;
 
+    setConfirmResetHistory(false);
     dispatch({ type: TaskActionTypes.RESET_TASK });
+  }, [confirmResetHistory, dispatch]);
+
+  function handleResetHistory() {
+    showMessage.dismiss();
+
+    showMessage.confirm("Tem certeza?", (confirmation) => {
+      setConfirmResetHistory(confirmation);
+    });
   }
 
   return (
