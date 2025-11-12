@@ -68,6 +68,15 @@ export function TaskReducer(
       localStorage.removeItem("state");
       return { ...initialTaskState };
     }
+
+    case TaskActionTypes.CHANGE_SETTINGS: {
+      return {
+        ...state,
+        config: {
+          ...action.payload,
+        },
+      };
+    }
   }
 
   return state;

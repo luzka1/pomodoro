@@ -1,24 +1,30 @@
+import { useEffect } from "react";
 import { Container } from "../../components/Container";
 import { GenericHtml } from "../../components/GenericHtml";
 import { Heading } from "../../components/Heading";
 import { RouterLink } from "../../components/RouterLink";
 import { MainTemplate } from "../../templates/MainTemplate";
 
-export function AboutPomodoroPage() {
-    return <MainTemplate>
-        <Container>
-            <GenericHtml>
-                <Heading>A Técnica Pomodoro 🍅</Heading>
+export function AboutPomodoro() {
+  useEffect(() => {
+    document.title = "Entenda a Técnica Pomodoro - Chronos Pomodoro";
+  }, []);
+
+  return (
+    <MainTemplate>
+      <Container>
+        <GenericHtml>
+          <Heading>A Técnica Pomodoro 🍅</Heading>
 
           <p>
-            A Técnica Pomodoro é uma metodologia de produtividade criada por{' '}
+            A Técnica Pomodoro é uma metodologia de produtividade criada por{" "}
             <strong>Francesco Cirillo</strong>, que consiste em dividir o
             trabalho em blocos de tempo (os famosos "Pomodoros") intercalados
             com pausas. O objetivo é manter o foco total por um período curto e
             garantir descansos para evitar o cansaço mental.
           </p>
 
-          <img src='https://placehold.co/1920x1080' alt='' />
+          <img src="https://placehold.co/1920x1080" alt="" />
 
           <h2>Como funciona o Pomodoro tradicional?</h2>
           <ul>
@@ -32,7 +38,7 @@ export function AboutPomodoroPage() {
               <strong>3. Faça uma pausa curta de 5 minutos</strong>.
             </li>
             <li>
-              <strong>4. A cada 4 ciclos, faça uma pausa longa</strong>{' '}
+              <strong>4. A cada 4 ciclos, faça uma pausa longa</strong>{" "}
               (geralmente 15 a 30 minutos).
             </li>
           </ul>
@@ -49,9 +55,9 @@ export function AboutPomodoroPage() {
           <h3>⚙️ Personalização do tempo</h3>
           <p>
             Você pode configurar o tempo de foco, descanso curto e descanso
-            longo do jeito que quiser! Basta acessar a{' '}
-            <RouterLink href='/settings'>página de configurações</RouterLink> e ajustar os minutos
-            como preferir.
+            longo do jeito que quiser! Basta acessar a{" "}
+            <RouterLink href="/settings">página de configurações</RouterLink> e
+            ajustar os minutos como preferir.
           </p>
 
           <h3>🔁 Ciclos organizados em sequência</h3>
@@ -95,10 +101,10 @@ export function AboutPomodoroPage() {
 
           <h3>📊 Histórico automático</h3>
           <p>
-            Todas as suas tarefas e ciclos concluídos ficam salvos no{' '}
-            <RouterLink href='/history'>histórico</RouterLink>, com status de completas ou
-            interrompidas. Assim, você consegue acompanhar sua evolução ao longo
-            do tempo.
+            Todas as suas tarefas e ciclos concluídos ficam salvos no{" "}
+            <RouterLink href="/history">histórico</RouterLink>, com status de
+            completas ou interrompidas. Assim, você consegue acompanhar sua
+            evolução ao longo do tempo.
           </p>
 
           <h2>Por que usar o Chronos Pomodoro?</h2>
@@ -110,15 +116,16 @@ export function AboutPomodoroPage() {
           </ul>
 
           <p>
-            <strong>Pronto pra focar?</strong> Bora lá{' '}
-            <RouterLink href='/'>voltar para a página inicial</RouterLink> e iniciar seus
-            Pomodoros! 🍅🚀
+            <strong>Pronto pra focar?</strong> Bora lá{" "}
+            <RouterLink href="/">voltar para a página inicial</RouterLink> e
+            iniciar seus Pomodoros! 🍅🚀
           </p>
 
           <p>
             <em>"Foco total, sem pressa, sem pausa, só vai!"</em> 💪🧘‍♂️
           </p>
-            </GenericHtml>
-        </Container>
+        </GenericHtml>
+      </Container>
     </MainTemplate>
+  );
 }

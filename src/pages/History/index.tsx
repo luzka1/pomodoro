@@ -24,6 +24,14 @@ export function History() {
     dispatch({ type: TaskActionTypes.RESET_TASK });
   }, [confirmResetHistory, dispatch]);
 
+  useEffect(() => {
+    document.title = "Histórico - Chronos Pomodoro";
+
+    return () => {
+      showMessage.dismiss();
+    };
+  }, []);
+
   function handleResetHistory() {
     showMessage.dismiss();
 
