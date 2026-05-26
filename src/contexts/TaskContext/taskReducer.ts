@@ -6,7 +6,7 @@ import { TaskActionTypes, type TaskActionsModel } from "./taskActions";
 
 export function TaskReducer(
   state: TaskStateModel,
-  action: TaskActionsModel
+  action: TaskActionsModel,
 ): TaskStateModel {
   switch (action.type) {
     case TaskActionTypes.START_TASK: {
@@ -59,7 +59,7 @@ export function TaskReducer(
         ...state,
         secondsRemaining: action.payload.secondsRemaining,
         formattedSecondsRemaining: formatSecondsToMinutes(
-          action.payload.secondsRemaining
+          action.payload.secondsRemaining,
         ),
       };
     }

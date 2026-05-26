@@ -8,7 +8,7 @@ export const TaskActionTypes = {
   COUNT_DOWN: "COUNT_DOWN",
   COMPLETE_TASK: "COMPLETE_TASK",
   CHANGE_SETTINGS: "CHANGE_SETTINGS",
-};
+} as const;
 
 export type TaskActionsWithPayload =
   | {
